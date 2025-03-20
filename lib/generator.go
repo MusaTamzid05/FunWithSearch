@@ -1,5 +1,6 @@
 package lib
 
+
 type NodeToIndexGenerator struct {
     selectors []Selector
     IndexList []Index

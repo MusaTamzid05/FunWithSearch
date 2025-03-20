@@ -1,5 +1,6 @@
 package lib
 
+
 type Selector interface {
     IsSelected(node Node) bool
 }
@@ -21,6 +22,6 @@ func (s SelectorByTextSize) IsSelected(node Node) bool {
 
 }
 
-func MakeSelectorByTextSize(maxSize, minSize int, key string) SelectorByTextSize {
+func MakeSelectorByTextSize(minSize, maxSize int, key string) SelectorByTextSize {
     return SelectorByTextSize{MinSize: minSize, MaxSize: maxSize, Key: key}
 }

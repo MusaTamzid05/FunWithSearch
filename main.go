@@ -5,6 +5,11 @@ import (
     "fmt"
 )
 
+type SizeData struct {
+    MinSize int
+    MaxSize int
+}
+
 func main() {
     nodeReader := lib.MakeCSVNodeReader("/home/musa/datasets/amazon_dataset/amz_ca_total_products_data_processed.csv")
     nodes, err := nodeReader.Read()
@@ -16,8 +21,34 @@ func main() {
 
     fmt.Println("Total nodes ", len(nodes))
 
-    for i := 0; i < 3; i += 1 {
-        nodes[i].Show()
-        fmt.Println("---")
+    sizeDataList := []SizeData {
+        SizeData{MinSize:0, MaxSize:500},
+        SizeData{MinSize:500, MaxSize:1000},
+        SizeData{MinSize:1000, MaxSize:1000000},
     }
+
+
+    var selectors []lib.Selector
+    selectors = make([]lib.Selector, len(sizeDataList))
+
+    for index, sizeData := range sizeDataList {
+        selectors[index] =  lib.MakeSelectorByTextSize(sizeData.MinSize,
+                                                     sizeData.MaxSize, 
+                                                     "title")
+    }
+
+
+
+    nodeToIndexGenerator := lib.MakeNodeToIndexGenerator(selectors)
+    nodeToIndexGenerator.Generate(nodes)
+
+    fmt.Println("total index ", len(nodeToIndexGenerator.IndexList))
+
+    for i, indexData := range nodeToIndexGenerator.IndexList {
+        fmt.Println(i , " => ", len(indexData.Nodes))
+    }
+
+
+
+
 }
