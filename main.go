@@ -27,9 +27,15 @@ func main() {
     stats.Show(nodes)
 
     sizeDataList := []SizeData {
-        SizeData{MinSize:0, MaxSize:500},
+        SizeData{MinSize:0, MaxSize:25},
+        SizeData{MinSize:25, MaxSize:80},
+        SizeData{MinSize:80, MaxSize:100},
+        SizeData{MinSize:100, MaxSize:150},
+        SizeData{MinSize:150, MaxSize:200},
+        SizeData{MinSize:200, MaxSize:300},
+        SizeData{MinSize:300, MaxSize:500},
         SizeData{MinSize:500, MaxSize:1000},
-        SizeData{MinSize:1000, MaxSize:1000000},
+        SizeData{MinSize:1000, MaxSize:2000},
     }
 
 
