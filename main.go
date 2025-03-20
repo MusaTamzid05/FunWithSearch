@@ -10,6 +10,9 @@ type SizeData struct {
     MaxSize int
 }
 
+// @TODO : Make all the nodes a pointer type
+// otherwises we are just making copies !!
+
 func main() {
     nodeReader := lib.MakeCSVNodeReader("/home/musa/datasets/amazon_dataset/amz_ca_total_products_data_processed.csv")
     nodes, err := nodeReader.Read()
@@ -20,6 +23,8 @@ func main() {
     }
 
     fmt.Println("Total nodes ", len(nodes))
+    stats := lib.MakeTextStats("title")
+    stats.Show(nodes)
 
     sizeDataList := []SizeData {
         SizeData{MinSize:0, MaxSize:500},
